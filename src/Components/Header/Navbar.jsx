@@ -1,6 +1,25 @@
-import React from "react";
+import React, { use } from "react";
+import { NavLink, useNavigate } from "react-router";
+import { AuthContext } from "../../Provider/AuthContext";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { user, signOutUser, authProviderLoading } = use(AuthContext);
+  const handleLogOut = () => {
+    signOutUser()
+      .then(() => {
+        toast.success("Logged out successfully!");
+        navigate("/auth/signin");
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
+  if (authProviderLoading) {
+    return;
+  }
+
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -48,7 +67,7 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal font-semibold px-1">
           <li>
-            <a>Home</a>
+            <NavLink to={"/"}>Home</NavLink>
           </li>
           <li>
             <a>All Vehicles</a>
@@ -65,9 +84,52 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end gap-2">
-        <a className="btn">Login</a>
-        <a className="btn">Register</a>
-        <a className="btn">Log out</a>
+        {user ? (
+          <>
+            <div className="relative w-12 h-12 group">
+              <img
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
+                src={
+                  user?.photoURL || "https://i.ibb.co/Kcdb9M8W/download-1.png"
+                }
+                alt="user"
+              />
+              <div className="absolute z-20 top-full  px-5 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 ">
+                {user?.displayName || ""}
+              </div>
+            </div>
+
+            <button
+              onClick={handleLogOut}
+              className="btn  hover:btn-secondary md:text-lg"
+            >
+              Log out
+            </button>
+          </>
+        ) : (
+          <>
+            <NavLink
+              to={"/auth/signin"}
+              className={({ isActive }) =>
+                `btn mr-2 md:mr-0 md:text-lg ${
+                  isActive ? "bg-yellow-400 rounded-full" : "rounded-full"
+                }`
+              }
+            >
+              Login
+            </NavLink>
+            <NavLink
+              to={"/auth/signup"}
+              className={({ isActive }) =>
+                `btn md:text-lg ${
+                  isActive ? "bg-yellow-400 rounded-full " : "rounded-full"
+                }`
+              }
+            >
+              Sign up
+            </NavLink>
+          </>
+        )}
       </div>
     </div>
   );
