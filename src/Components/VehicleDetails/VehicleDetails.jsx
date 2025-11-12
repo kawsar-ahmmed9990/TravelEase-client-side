@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useLoaderData } from "react-router";
+import { AuthContext } from "../../Provider/AuthContext";
 
 const VehicleDetails = () => {
-  const vehicle = useLoaderData();
+  const vehicleData = useLoaderData();
+  const { user } = useContext(AuthContext);
+  const [vehicle, setVehicle] = useState(vehicleData);
+  const [loading, setLoading] = useState(false);
 
   if (!vehicle)
     return (
@@ -10,6 +14,53 @@ const VehicleDetails = () => {
         No vehicle found
       </div>
     );
+
+  const handleBookNow = async () => {
+    if (!user?.email) {
+      alert("Please login to book this vehicle!");
+      return;
+    }
+
+    setLoading(true);
+
+    const bookingData = {
+      vehicleId: vehicle._id,
+      vehicleName: vehicle.vehicleName,
+      ownerName: vehicle.ownerName,
+      pricePerDay: vehicle.pricePerDay,
+      location: vehicle.location,
+      availability: "Booked",
+      userEmail: user.email,
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      const res = await fetch("http://localhost:3000/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookingData),
+      });
+      const data = await res.json();
+
+      if (data.insertedId) {
+        await fetch(`http://localhost:3000/vehicles/${vehicle._id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ availability: "Booked" }),
+        });
+
+        setVehicle((prev) => ({ ...prev, availability: "Booked" }));
+        alert("Vehicle booked successfully!");
+      } else {
+        alert("Failed to book vehicle.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error booking vehicle.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="max-w-5xl mx-auto p-6">
@@ -27,7 +78,7 @@ const VehicleDetails = () => {
             <h2 className="text-4xl font-bold text-gray-800 mb-2">
               {vehicle.vehicleName}
             </h2>
-            <p className="text-gray-600 mb-1">Owner: {vehicle.owner}</p>
+            <p className="text-gray-600 mb-1">Owner: {vehicle.ownerName}</p>
             <p className="text-gray-600 mb-1">Category: {vehicle.category}</p>
             <p className="text-gray-600 mb-1">Location: {vehicle.location}</p>
             <p className="text-gray-600 mb-1">
@@ -44,20 +95,23 @@ const VehicleDetails = () => {
             >
               {vehicle.availability}
             </span>
-
-            <h3 className="text-lg font-semibold text-gray-700 mb-1">
-              Description:
-            </h3>
-            <p className="text-gray-700 mb-4">{vehicle.description}</p>
-
-            <p className="text-gray-500 text-sm">
-              Created At: {new Date(vehicle.createdAt).toLocaleString()}
-            </p>
           </div>
 
           <div className="mt-6">
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition duration-300">
-              Book Now
+            <button
+              disabled={vehicle.availability === "Booked" || loading}
+              onClick={handleBookNow}
+              className={`w-full py-3 rounded-xl font-semibold transition duration-300 ${
+                vehicle.availability === "Booked"
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700 text-white"
+              }`}
+            >
+              {loading
+                ? "Booking..."
+                : vehicle.availability === "Booked"
+                ? "Booked"
+                : "Book Now"}
             </button>
           </div>
         </div>
