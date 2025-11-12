@@ -10,6 +10,7 @@ import MyVehicles from "../Components/MyVehicles/MyVehicles";
 import MyBooking from "../Components/MyBooking/MyBooking";
 import AddVehicles from "../Components/AddVehicles/AddVehicles";
 import PrivateRoute from "./PrivateRoute";
+import VehicleDetails from "../Components/VehicleDetails/VehicleDetails";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,12 @@ const router = createBrowserRouter([
       {
         path: "/allvehicles",
         element: <AllVehicles></AllVehicles>,
+      },
+      {
+        path: "/vehicledetails/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/vehicles/${params.id}`),
+        element: <VehicleDetails></VehicleDetails>,
       },
       {
         path: "/addvehicles",

@@ -1,6 +1,7 @@
 "use client"; // mark as client component
 
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router";
 
 const VehicleCard = ({ latestVehiclesPromise }) => {
   const [latestVehicles, setLatestVehicles] = useState([]);
@@ -41,9 +42,12 @@ const VehicleCard = ({ latestVehiclesPromise }) => {
             </div>
           </div>
           <div className="p-4">
-            <button className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+            <Link
+              to={`/vehicledetails/${vehicle._id}`}
+              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+            >
               View Details
-            </button>
+            </Link>
           </div>
         </div>
       ))}
