@@ -9,8 +9,7 @@ const SignIn = () => {
   const { signInUser, googleSignIn } = use(AuthContext);
   const navigate = useNavigate();
   const emailRef = useRef(null);
-  //   const location = useLocation();
-  // console.log(location);
+  
   const handleSignIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -19,7 +18,7 @@ const SignIn = () => {
 
     signInUser(email, password)
       .then(() => {
-        // navigate("/");
+        
         toast.success("Login successfull!");
         navigate(`${location.state ? location.state : "/"}`);
         e.target.reset();
@@ -27,7 +26,7 @@ const SignIn = () => {
       .catch((e) => {
         if (e.code === "auth/invalid-credential") {
           toast.error("Invalid email or password. Please try again.");
-          // navigate("/auth/signup");
+          
         } else if (e.code === "auth/network-request-failed") {
           toast.error("Network error. Please check your internet connection.");
         } else {
@@ -40,7 +39,7 @@ const SignIn = () => {
     googleSignIn()
       .then((res) => {
         console.log(res);
-        // navigate("/");
+        
         toast.success("Login successfull!");
         navigate(`${location.state ? location.state : "/"}`);
       })

@@ -5,6 +5,11 @@ import AuthLayout from "../Layouts/AuthLayout";
 import SignUp from "../Pages/SignUp";
 import SignIn from "../Pages/SignIn";
 import ForgetPass from "../Pages/ForgetPass";
+import AllVehicles from "../Components/AllVehicles/AllVehicles";
+import MyVehicles from "../Components/MyVehicles/MyVehicles";
+import MyBooking from "../Components/MyBooking/MyBooking";
+import AddVehicles from "../Components/AddVehicles/AddVehicles";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +19,34 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/allvehicles",
+        element: <AllVehicles></AllVehicles>,
+      },
+      {
+        path: "/addvehicles",
+        element: (
+          <PrivateRoute>
+            <AddVehicles></AddVehicles>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myvehicles",
+        element: (
+          <PrivateRoute>
+            <MyVehicles></MyVehicles>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/mybooking",
+        element: (
+          <PrivateRoute>
+            <MyBooking></MyBooking>
+          </PrivateRoute>
+        ),
       },
     ],
   },

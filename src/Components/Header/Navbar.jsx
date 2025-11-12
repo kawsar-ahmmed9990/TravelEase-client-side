@@ -62,7 +62,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-2xl font-semibold">TravelEase</a>
+        <a className=" text-2xl font-semibold">TravelEase</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal font-semibold px-1">
@@ -70,16 +70,16 @@ const Navbar = () => {
             <NavLink to={"/"}>Home</NavLink>
           </li>
           <li>
-            <a>All Vehicles</a>
+            <NavLink to={"/allvehicles"}>All Vehicles</NavLink>
           </li>
           <li>
-            <a>Add Vehicles</a>
+            <NavLink to={"/addvehicles"}>Add Vehicles</NavLink>
           </li>
           <li>
-            <a>My Vehicles</a>
+            <NavLink to={"/myvehicles"}>My Vehicles</NavLink>
           </li>
           <li>
-            <a>My Bookings</a>
+            <NavLink to={"/mybooking"}>My Bookings</NavLink>
           </li>
         </ul>
       </div>
@@ -101,7 +101,7 @@ const Navbar = () => {
 
             <button
               onClick={handleLogOut}
-              className="btn  hover:btn-secondary md:text-lg"
+              className="btn rounded-full  hover:btn-secondary md:text-lg"
             >
               Log out
             </button>
