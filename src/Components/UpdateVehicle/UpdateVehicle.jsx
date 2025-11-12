@@ -1,12 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthContext";
 
-const AddVehicles = () => {
+const UpdateVehicle = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+
   const [vehicleData, setVehicleData] = useState({
     vehicleName: "",
-    ownerName: "",
+    owner: "",
     category: "",
     pricePerDay: "",
     location: "",
@@ -16,93 +20,92 @@ const AddVehicles = () => {
     userEmail: user?.email || "",
   });
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/vehicles/${id}`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        setVehicleData({
+          vehicleName: data.vehicleName || "",
+          owner: data.owner || data.ownerName || "",
+          category: data.category || data.categories || "",
+          pricePerDay: data.pricePerDay || "",
+          location: data.location || "",
+          availability: data.availability || "",
+          description: data.description || "",
+          coverImage: data.coverImage || "",
+          userEmail: data.userEmail || user?.email || "",
+        });
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire("Error", "Failed to load vehicle data", "error");
+        setLoading(false);
+      });
+  }, [id, user?.email]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setVehicleData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
 
-    const requiredFields = [
-      "vehicleName",
-      "ownerName",
-      "category",
-      "pricePerDay",
-      "location",
-      "availability",
-      "description",
-      "coverImage",
-    ];
-    for (let field of requiredFields) {
-      if (!vehicleData[field]) {
-        Swal.fire("Error", `Please fill the ${field} field`, "error");
-        return;
-      }
-    }
-
-    // Add createdAt field
-    const vehicleToSave = {
-      ...vehicleData,
-      createdAt: new Date().toISOString(),
-    };
-
-    fetch("http://localhost:3000/vehicles", {
-      method: "POST",
+    fetch(`http://localhost:3000/vehicles/${id}`, {
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(vehicleToSave),
+      body: JSON.stringify(vehicleData),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        if (data.modifiedCount > 0) {
           Swal.fire({
             icon: "success",
-            title: "Vehicle added successfully!",
+            title: "Vehicle updated successfully!",
             showConfirmButton: false,
             timer: 1500,
           });
-          // Reset form
-          setVehicleData({
-            vehicleName: "",
-            ownerName: "",
-            category: "",
-            pricePerDay: "",
-            location: "",
-            availability: "",
-            description: "",
-            coverImage: "",
-            userEmail: user?.email || "",
-          });
+          navigate("/myvehicles");
+        } else {
+          Swal.fire("Info", "No changes were made", "info");
         }
       })
       .catch((err) => {
-        Swal.fire("Error", "Failed to add vehicle", "error");
         console.error(err);
+        Swal.fire("Error", "Failed to update vehicle", "error");
       });
   };
+
+  if (loading) return <p className="text-center mt-10">Loading...</p>;
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
       <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">
-        Add New Vehicle
+        Update Vehicle
       </h2>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleUpdate}
         className="bg-white shadow-md rounded-lg p-6 space-y-4"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
             type="text"
             name="vehicleName"
-            value={vehicleData.vehicleName}
+            value={vehicleData.vehicleName || ""}
             onChange={handleChange}
             placeholder="Vehicle Name"
             className="border px-3 py-2 rounded w-full"
           />
           <input
             type="text"
-            name="ownerName"
-            value={vehicleData.ownerName}
+            name="owner"
+            value={vehicleData.owner || ""}
             onChange={handleChange}
             placeholder="Owner Name"
             className="border px-3 py-2 rounded w-full"
@@ -113,7 +116,7 @@ const AddVehicles = () => {
           <input
             type="text"
             name="category"
-            value={vehicleData.category}
+            value={vehicleData.category || ""}
             onChange={handleChange}
             placeholder="Category (SUV, Sedan, Electric, Van)"
             className="border px-3 py-2 rounded w-full"
@@ -121,7 +124,7 @@ const AddVehicles = () => {
           <input
             type="number"
             name="pricePerDay"
-            value={vehicleData.pricePerDay}
+            value={vehicleData.pricePerDay || ""}
             onChange={handleChange}
             placeholder="Price per Day"
             className="border px-3 py-2 rounded w-full"
@@ -132,7 +135,7 @@ const AddVehicles = () => {
           <input
             type="text"
             name="location"
-            value={vehicleData.location}
+            value={vehicleData.location || ""}
             onChange={handleChange}
             placeholder="Location"
             className="border px-3 py-2 rounded w-full"
@@ -140,9 +143,9 @@ const AddVehicles = () => {
           <input
             type="text"
             name="availability"
-            value={vehicleData.availability}
+            value={vehicleData.availability || ""}
             onChange={handleChange}
-            placeholder="Availability (e.g., Available, Booked)"
+            placeholder="Availability"
             className="border px-3 py-2 rounded w-full"
           />
         </div>
@@ -150,7 +153,7 @@ const AddVehicles = () => {
         <input
           type="text"
           name="coverImage"
-          value={vehicleData.coverImage}
+          value={vehicleData.coverImage || ""}
           onChange={handleChange}
           placeholder="Cover Image URL"
           className="border px-3 py-2 rounded w-full"
@@ -158,7 +161,7 @@ const AddVehicles = () => {
 
         <textarea
           name="description"
-          value={vehicleData.description}
+          value={vehicleData.description || ""}
           onChange={handleChange}
           placeholder="Description"
           className="border px-3 py-2 rounded w-full"
@@ -168,20 +171,20 @@ const AddVehicles = () => {
         <input
           type="email"
           name="userEmail"
-          value={vehicleData.userEmail}
+          value={vehicleData.userEmail || ""}
           readOnly
           className="border px-3 py-2 rounded w-full bg-gray-100"
         />
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition w-full"
+          className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition w-full"
         >
-          Add Vehicle
+          Update Vehicle
         </button>
       </form>
     </div>
   );
 };
 
-export default AddVehicles;
+export default UpdateVehicle;

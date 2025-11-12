@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "react-router";
 
 const AllVehicles = () => {
   const allVehicles = useLoaderData();
-  console.log(allVehicles);
+  // console.log(allVehicles);
   return (
     <div className="max-w-11/12 mx-auto">
       <div>
