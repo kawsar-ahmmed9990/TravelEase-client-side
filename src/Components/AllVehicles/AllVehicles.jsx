@@ -3,23 +3,41 @@ import { FaLocationDot } from "react-icons/fa6";
 import { TbCategoryFilled } from "react-icons/tb";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 const AllVehicles = () => {
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
   // console.log(allVehicles);
+  // useEffect(() => {
+  //   fetch("https://travelease-server-side-omega.vercel.app/sort")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setVehicles(data);
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       setLoading(false);
+  //     });
+  // }, []);
   useEffect(() => {
-    fetch("https://travelease-server-side-omega.vercel.app/sort")
-      .then((res) => res.json())
-      .then((data) => {
-        setVehicles(data);
-        setLoading(false);
-      })
-      .catch((err) => {
+    const fetchVehicles = async () => {
+      try {
+        const response = await axios.get(
+          "https://travelease-server-side-omega.vercel.app/sort"
+        );
+        setVehicles(response.data);
+      } catch (err) {
         console.error(err);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchVehicles();
   }, []);
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64 bg-[#f1f5e8]">
