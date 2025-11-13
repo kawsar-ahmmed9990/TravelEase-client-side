@@ -69,6 +69,12 @@ const Navbar = () => {
             <li>
               <NavLink to={"/mybooking"}>My Bookings</NavLink>
             </li>
+            <input
+              onChange={(e) => handleTheme(e.target.checked)}
+              type="checkbox"
+              defaultChecked={localStorage.getItem("theme") === "dark"}
+              className="toggle lg:hidden"
+            />
           </ul>
         </div>
         <a className=" text-3xl font-medium">
