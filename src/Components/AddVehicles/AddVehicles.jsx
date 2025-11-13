@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthContext";
 import { motion } from "framer-motion";
+import { format } from "date-fns";
 
 const AddVehicles = () => {
   const { user } = useContext(AuthContext);
@@ -45,7 +46,8 @@ const AddVehicles = () => {
     // Add createdAt field
     const vehicleToSave = {
       ...vehicleData,
-      createdAt: new Date().toISOString(),
+      // createdAt: new Date().toISOString(),
+      createdAt: format(new Date(), "PPPppp"),
     };
 
     fetch("https://travelease-server-side-omega.vercel.app/vehicles", {

@@ -9,7 +9,7 @@ const AllVehicles = () => {
   const [loading, setLoading] = useState(true);
   // console.log(allVehicles);
   useEffect(() => {
-    fetch("https://travelease-server-side-omega.vercel.app/vehicles")
+    fetch("https://travelease-server-side-omega.vercel.app/sort")
       .then((res) => res.json())
       .then((data) => {
         setVehicles(data);
