@@ -84,8 +84,8 @@ const UpdateVehicle = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64 bg-[#f1f5e8]">
-        <div className="text-3xl font-bold text-black flex flex-col items-center">
+      <div className="flex justify-center items-center h-64 bg-[#f1f5e8] dark:bg-gray-900">
+        <div className="text-3xl font-bold text-black dark:text-white flex flex-col items-center">
           <p className="mt-2">
             L<span className="inline-block animate-spin">🔄</span>ading...
           </p>
@@ -96,12 +96,12 @@ const UpdateVehicle = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
-      <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">
+      <h2 className="text-3xl font-bold mb-6 text-center text-blue-700 dark:text-blue-400">
         Update Vehicle
       </h2>
       <form
         onSubmit={handleUpdate}
-        className="bg-white shadow-md rounded-lg p-6 space-y-4"
+        className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 space-y-4"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
@@ -110,7 +110,7 @@ const UpdateVehicle = () => {
             value={vehicleData.vehicleName || ""}
             onChange={handleChange}
             placeholder="Vehicle Name"
-            className="border px-3 py-2 rounded w-full"
+            className="border px-3 py-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
           />
           <input
             type="text"
@@ -118,24 +118,16 @@ const UpdateVehicle = () => {
             value={vehicleData.owner || ""}
             onChange={handleChange}
             placeholder="Owner Name"
-            className="border px-3 py-2 rounded w-full"
+            className="border px-3 py-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* <input
-            type="text"
-            name="category"
-            value={vehicleData.category || ""}
-            onChange={handleChange}
-            placeholder="Category (SUV, Sedan, Electric, Van)"
-            className="border px-3 py-2 rounded w-full"
-          /> */}
           <select
             name="category"
             value={vehicleData.category || ""}
             onChange={handleChange}
-            className="border px-3 py-2 rounded w-full"
+            className="border px-3 py-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
           >
             <option value="">Select Category</option>
             <option value="SUV">SUV</option>
@@ -150,7 +142,7 @@ const UpdateVehicle = () => {
             value={vehicleData.pricePerDay || ""}
             onChange={handleChange}
             placeholder="Price per Day"
-            className="border px-3 py-2 rounded w-full"
+            className="border px-3 py-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
           />
         </div>
 
@@ -161,21 +153,13 @@ const UpdateVehicle = () => {
             value={vehicleData.location || ""}
             onChange={handleChange}
             placeholder="Location"
-            className="border px-3 py-2 rounded w-full"
+            className="border px-3 py-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
           />
-          {/* <input
-            type="text"
-            name="availability"
-            value={vehicleData.availability || ""}
-            onChange={handleChange}
-            placeholder="Availability"
-            className="border px-3 py-2 rounded w-full"
-          /> */}
           <select
             name="availability"
             value={vehicleData.availability || ""}
             onChange={handleChange}
-            className="border px-3 py-2 rounded w-full"
+            className="border px-3 py-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
           >
             <option value="">Select Availability</option>
             <option value="Available">Available</option>
@@ -189,7 +173,7 @@ const UpdateVehicle = () => {
           value={vehicleData.coverImage || ""}
           onChange={handleChange}
           placeholder="Cover Image URL"
-          className="border px-3 py-2 rounded w-full"
+          className="border px-3 py-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
         />
 
         <textarea
@@ -197,7 +181,7 @@ const UpdateVehicle = () => {
           value={vehicleData.description || ""}
           onChange={handleChange}
           placeholder="Description"
-          className="border px-3 py-2 rounded w-full"
+          className="border px-3 py-2 rounded w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
           rows="4"
         ></textarea>
 
@@ -206,12 +190,12 @@ const UpdateVehicle = () => {
           name="userEmail"
           value={vehicleData.userEmail || ""}
           readOnly
-          className="border px-3 py-2 rounded w-full bg-gray-100"
+          className="border px-3 py-2 rounded w-full bg-gray-100 dark:bg-gray-600 text-gray-900 dark:text-gray-100"
         />
 
         <button
           type="submit"
-          className="btn btn-success rounded-full text-white px-4 py-2  transition w-full"
+          className="btn btn-success rounded-full text-white px-4 py-2 transition w-full"
         >
           Update Vehicle
         </button>
