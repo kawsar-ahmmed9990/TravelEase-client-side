@@ -64,7 +64,7 @@ const VehicleCard = ({ latestVehiclesPromise }) => {
           <div className="p-4 w-full">
             <Link
               to={`/vehicledetails/${vehicle._id}`}
-              className="w-full block text-center border border-black  py-2 rounded-full hover:btn btn-success hover:text-white hover:border-0 transition"
+              className="w-full block text-center   py-2 rounded-full hover:btn bg-[#22c55e] text-white hover:border-0 transition"
             >
               View Details
             </Link>

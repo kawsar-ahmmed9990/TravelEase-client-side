@@ -15,7 +15,7 @@ const Banner = () => {
         </p>
         <Link
           to={"/allvehicles"}
-          className="btn btn-success text-white   font-semibold px-6 py-3 rounded-full shadow-md transition duration-300"
+          className="btn bg-[#22c55e] text-white   font-semibold px-6 py-3 rounded-full shadow-md transition duration-300"
         >
           All Vehicles
         </Link>

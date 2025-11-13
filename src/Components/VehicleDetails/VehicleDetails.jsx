@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../../Provider/AuthContext";
+import { FaCarSide, FaDollarSign, FaUser } from "react-icons/fa6";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 const VehicleDetails = () => {
   const vehicleData = useLoaderData();
@@ -69,48 +71,77 @@ const VehicleDetails = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
-      <div className="bg-white shadow-xl rounded-2xl overflow-hidden flex flex-col md:flex-row">
-        <div className="md:w-1/2">
+    <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="bg-white shadow-2xl rounded-3xl overflow-hidden flex flex-col md:flex-row transition-all duration-300 hover:shadow-blue-200">
+        <div className="md:w-1/2 relative">
           <img
             src={vehicle.coverImage}
             alt={vehicle.vehicleName}
-            className="w-full h-80 object-cover md:h-full"
+            className="w-full h-80 md:h-full object-cover"
           />
+          <div
+            className={`absolute top-4 left-4 px-4 py-1 rounded-full text-sm font-semibold ${
+              vehicle.availability === "Available"
+                ? "bg-green-100 text-green-800"
+                : "bg-red-100 text-red-700"
+            }`}
+          >
+            {vehicle.availability}
+          </div>
         </div>
 
-        <div className="md:w-1/2 p-6 flex flex-col justify-between">
+        <div className="md:w-1/2 p-8 flex flex-col justify-between">
           <div>
-            <h2 className="text-4xl font-bold text-gray-800 mb-2">
+            <h2 className="text-4xl font-bold text-gray-800 mb-3">
               {vehicle.vehicleName}
             </h2>
-            <p className="text-gray-600 mb-1">Owner: {vehicle.ownerName}</p>
-            <p className="text-gray-600 mb-1">Category: {vehicle.category}</p>
-            <p className="text-gray-600 mb-1">Location: {vehicle.location}</p>
-            <p className="text-gray-600 mb-1">
-              Price per day:{" "}
-              <span className="font-semibold">${vehicle.pricePerDay}</span>
+            <p className="text-gray-500 text-sm mb-6">
+              A reliable and comfortable {vehicle.category.toLowerCase()} ready
+              for your next journey.
             </p>
 
-            <span
-              className={`inline-block px-3 py-1 rounded-full text-sm font-medium mt-2 mb-4 ${
-                vehicle.availability === "Available"
-                  ? "bg-green-100 text-green-800"
-                  : "bg-red-100 text-red-800"
-              }`}
-            >
-              {vehicle.availability}
-            </span>
+            <div className="space-y-3 text-gray-700">
+              <p className="flex items-center gap-3">
+                <FaUser className="text-blue-500" />
+                <span>
+                  <strong>Owner:</strong> {vehicle.ownerName}
+                </span>
+              </p>
+
+              <p className="flex items-center gap-3">
+                <FaCarSide className="text-blue-500" />
+                <span>
+                  <strong>Category:</strong> {vehicle.category}
+                </span>
+              </p>
+
+              <p className="flex items-center gap-3">
+                <FaMapMarkerAlt className="text-blue-500" />
+                <span>
+                  <strong>Location:</strong> {vehicle.location}
+                </span>
+              </p>
+
+              <p className="flex items-center gap-3">
+                <FaDollarSign className="text-blue-500" />
+                <span>
+                  <strong>Price/Day:</strong>{" "}
+                  <span className="text-lg font-semibold text-blue-600">
+                    ${vehicle.pricePerDay}
+                  </span>
+                </span>
+              </p>
+            </div>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-8">
             <button
               disabled={vehicle.availability === "Booked" || loading}
               onClick={handleBookNow}
               className={`w-full py-3 rounded-xl font-semibold transition duration-300 ${
                 vehicle.availability === "Booked"
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700 text-white"
+                  : "btn bg-[#22c55e] text-white"
               }`}
             >
               {loading

@@ -58,6 +58,12 @@ const MyVehicles = () => {
       </div>
     );
   }
+  if (vehicles.length === 0)
+    return (
+      <p className="text-center pt-20 font-bold text-gray-500">
+        You haven’t added any vehicles yet. Start sharing your ride now!
+      </p>
+    );
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">

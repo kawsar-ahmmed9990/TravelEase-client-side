@@ -35,11 +35,17 @@ const MyBooking = () => {
     );
   }
   if (bookings.length === 0)
-    return <p className="text-center mt-6 text-gray-500">No bookings found.</p>;
+    return (
+      <p className="text-center pt-20 font-bold text-gray-500">
+        Your booking list is empty — start exploring vehicles!
+      </p>
+    );
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-6 text-center">My Bookings</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center">
+        Total Booking : {bookings.length}
+      </h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {bookings.map((booking) => (
           <div
