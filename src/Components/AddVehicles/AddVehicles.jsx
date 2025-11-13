@@ -43,10 +43,8 @@ const AddVehicles = () => {
       }
     }
 
-    // Add createdAt field
     const vehicleToSave = {
       ...vehicleData,
-      // createdAt: new Date().toISOString(),
       createdAt: format(new Date(), "PPPppp"),
     };
 
@@ -85,20 +83,20 @@ const AddVehicles = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-10">
+    <div className="max-w-3xl mx-auto px-6 py-10 dark:bg-gray-900 dark:text-gray-100">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className=" rounded-xl shadow-lg"
+        className="rounded-xl shadow-lg dark:bg-gray-800"
       >
-        <h2 className="text-3xl font-bold mb-6 text-center ">
+        <h2 className="text-3xl font-bold mb-6 text-center dark:text-gray-100">
           Add New Vehicle
         </h2>
         <form
           onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded-lg p-6 space-y-4"
+          className="bg-white shadow-md rounded-lg p-6 space-y-4 dark:bg-gray-700"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input
@@ -107,7 +105,7 @@ const AddVehicles = () => {
               value={vehicleData.vehicleName}
               onChange={handleChange}
               placeholder="Vehicle Name"
-              className="border px-3 py-2 rounded w-full"
+              className="border px-3 py-2 rounded w-full dark:bg-gray-600 dark:text-gray-100"
             />
             <input
               type="text"
@@ -115,24 +113,16 @@ const AddVehicles = () => {
               value={vehicleData.ownerName}
               onChange={handleChange}
               placeholder="Owner Name"
-              className="border px-3 py-2 rounded w-full"
+              className="border px-3 py-2 rounded w-full dark:bg-gray-600 dark:text-gray-100"
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* <input
-            type="text"
-            name="category"
-            value={vehicleData.category}
-            onChange={handleChange}
-            placeholder="Category (SUV, Sedan, Electric, Van)"
-            className="border px-3 py-2 rounded w-full"
-          /> */}
             <select
               name="category"
               value={vehicleData.category}
               onChange={handleChange}
-              className="border px-3 py-2 rounded w-full"
+              className="border px-3 py-2 rounded w-full dark:bg-gray-600 dark:text-gray-100"
             >
               <option value="">Select Category</option>
               <option value="SUV">SUV</option>
@@ -147,7 +137,7 @@ const AddVehicles = () => {
               value={vehicleData.pricePerDay}
               onChange={handleChange}
               placeholder="Price per Day"
-              className="border px-3 py-2 rounded w-full"
+              className="border px-3 py-2 rounded w-full dark:bg-gray-600 dark:text-gray-100"
             />
           </div>
 
@@ -158,21 +148,13 @@ const AddVehicles = () => {
               value={vehicleData.location}
               onChange={handleChange}
               placeholder="Location"
-              className="border px-3 py-2 rounded w-full"
+              className="border px-3 py-2 rounded w-full dark:bg-gray-600 dark:text-gray-100"
             />
-            {/* <input
-            type="text"
-            name="availability"
-            value={vehicleData.availability}
-            onChange={handleChange}
-            placeholder="Availability (e.g., Available, Booked)"
-            className="border px-3 py-2 rounded w-full"
-          /> */}
             <select
               name="availability"
               value={vehicleData.availability}
               onChange={handleChange}
-              className="border px-3 py-2 rounded w-full"
+              className="border px-3 py-2 rounded w-full dark:bg-gray-600 dark:text-gray-100"
             >
               <option value="">Select Availability</option>
               <option value="Available">Available</option>
@@ -186,7 +168,7 @@ const AddVehicles = () => {
             value={vehicleData.coverImage}
             onChange={handleChange}
             placeholder="Cover Image URL"
-            className="border px-3 py-2 rounded w-full"
+            className="border px-3 py-2 rounded w-full dark:bg-gray-600 dark:text-gray-100"
           />
 
           <textarea
@@ -194,7 +176,7 @@ const AddVehicles = () => {
             value={vehicleData.description}
             onChange={handleChange}
             placeholder="Description"
-            className="border px-3 py-2 rounded w-full"
+            className="border px-3 py-2 rounded w-full dark:bg-gray-600 dark:text-gray-100"
             rows="4"
           ></textarea>
 
@@ -203,12 +185,12 @@ const AddVehicles = () => {
             name="userEmail"
             value={vehicleData.userEmail}
             readOnly
-            className="border px-3 py-2 rounded w-full bg-gray-100"
+            className="border px-3 py-2 rounded w-full bg-gray-100 dark:bg-gray-600 dark:text-gray-100"
           />
 
           <button
             type="submit"
-            className="btn bg-[#22c55e] font-medium px-4 py-2 rounded-full text-white transition w-full"
+            className="btn bg-[#22c55e] font-medium px-4 py-2 rounded-full text-white transition w-full hover:bg-green-700"
           >
             Add Vehicle
           </button>

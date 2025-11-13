@@ -93,7 +93,7 @@ const SignIn = () => {
                 >
                   Forgot password?
                 </button>
-                <button className="btn btn-success text-white rounded-full mt-4">
+                <button className="btn bg-[#22c55e] text-white rounded-full mt-4">
                   Sign In
                 </button>
               </fieldset>

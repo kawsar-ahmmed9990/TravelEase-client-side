@@ -9,16 +9,17 @@ const Home = () => {
   const latestVehiclesPromise = fetch(
     "https://travelease-server-side-omega.vercel.app/latest-vehicles"
   ).then((res) => res.json());
+
   return (
-    <div>
+    <div className="dark:bg-gray-900">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="bg-gray-100  rounded-xl shadow-lg"
+        className="bg-gray-100 dark:bg-gray-800 rounded-xl shadow-lg"
       >
-        <Banner></Banner>
+        <Banner />
       </motion.div>
 
       <motion.div
@@ -26,9 +27,9 @@ const Home = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="bg-gray-100  rounded-xl "
+        className="bg-gray-100 dark:bg-gray-800 rounded-xl"
       >
-        <TopCategories></TopCategories>
+        <TopCategories />
       </motion.div>
 
       <motion.div
@@ -36,25 +37,26 @@ const Home = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="bg-gray-100  rounded-xl shadow-lg"
+        className="bg-gray-100 dark:bg-gray-800 rounded-xl shadow-lg"
       >
-        <section className="max-w-11/12 mx-auto pb-10">
-          <h1 className="text-3xl font-bold my-5 text-center">
-            Newest Additions
-          </h1>
-          <VehicleCard
-            latestVehiclesPromise={latestVehiclesPromise}
-          ></VehicleCard>
-        </section>
+        <div className="dark:bg-gray-900">
+          <section className="max-w-11/12 mx-auto pb-10 ">
+            <h1 className="text-3xl font-bold my-5 text-center text-gray-800 dark:text-gray-100">
+              Newest Additions
+            </h1>
+            <VehicleCard latestVehiclesPromise={latestVehiclesPromise} />
+          </section>
+        </div>
       </motion.div>
+
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="bg-gray-100  rounded-xl shadow-lg"
+        className="bg-gray-100 dark:bg-gray-900 rounded-xl shadow-lg"
       >
-        <AboutTravelEase></AboutTravelEase>
+        <AboutTravelEase />
       </motion.div>
     </div>
   );

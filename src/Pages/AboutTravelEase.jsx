@@ -2,17 +2,19 @@ import React from "react";
 
 const AboutTravelEase = () => {
   return (
-    <section className="py-12 bg-white">
+    <section className="py-12 bg-white dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold mb-6">About TravelEase</h2>
-        <p className="text-gray-700 text-lg mb-6">
+        <h2 className="text-3xl font-bold mb-6 dark:text-gray-100">
+          About TravelEase
+        </h2>
+        <p className="text-gray-700 dark:text-gray-300 text-lg mb-6">
           TravelEase is your one-stop vehicle booking platform. Explore a
           variety of vehicles for rent, manage your trips efficiently, and enjoy
           seamless bookings with trusted owners. Whether you need an SUV for
           adventure or an Electric car for eco-friendly travel, TravelEase has
           you covered.
         </p>
-        <button className="btn bg-[#22c55e] text-white  font-semibold px-6 py-3 rounded-full shadow-md transition duration-300">
+        <button className="btn bg-[#22c55e] text-white font-semibold px-6 py-3 rounded-full shadow-md transition duration-300 hover:bg-green-700">
           Learn More
         </button>
       </div>

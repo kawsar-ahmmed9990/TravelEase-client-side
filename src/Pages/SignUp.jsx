@@ -102,7 +102,7 @@ const SignUp = () => {
                   </span>
                 </div>
 
-                <button className="btn btn-success rounded-full text-white mt-4">
+                <button className="btn bg-[#22c55e] rounded-full text-white mt-4">
                   Sign Up
                 </button>
               </fieldset>

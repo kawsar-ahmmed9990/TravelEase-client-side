@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../../Provider/AuthContext";
 import toast from "react-hot-toast";
@@ -6,7 +6,16 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const { user, signOutUser, authProviderLoading } = use(AuthContext);
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
   const handleLogOut = () => {
     signOutUser()
       .then(() => {
@@ -20,7 +29,6 @@ const Navbar = () => {
   if (authProviderLoading) {
     return;
   }
-
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -85,6 +93,12 @@ const Navbar = () => {
             <NavLink to={"/mybooking"}>My Bookings</NavLink>
           </li>
         </ul>
+        <input
+          onChange={(e) => handleTheme(e.target.checked)}
+          type="checkbox"
+          defaultChecked={localStorage.getItem("theme") === "dark"}
+          className="toggle"
+        />
       </div>
       <div className="navbar-end gap-2">
         {user ? (
@@ -116,7 +130,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `btn mr-2 md:mr-0 md:text-lg ${
                   isActive
-                    ? "btn-success text-white rounded-full"
+                    ? "bg-[#22c55e] text-white rounded-full"
                     : "rounded-full"
                 }`
               }
@@ -128,7 +142,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `btn md:text-lg ${
                   isActive
-                    ? "btn-success text-white rounded-full "
+                    ? "bg-[#22c55e] text-white rounded-full "
                     : "rounded-full"
                 }`
               }

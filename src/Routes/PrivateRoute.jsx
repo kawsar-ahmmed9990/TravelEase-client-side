@@ -4,12 +4,11 @@ import { Navigate } from "react-router";
 
 const PrivateRoute = ({ children }) => {
   const { user, authProviderLoading } = use(AuthContext);
-  //   const location = useLocation();
-  // console.log(location);
+
   if (authProviderLoading) {
     return (
-      <div className="flex justify-center items-center h-64 bg-[#f1f5e8]">
-        <div className="text-3xl font-bold text-black flex flex-col items-center">
+      <div className="flex justify-center items-center h-64 bg-[#f1f5e8] dark:bg-gray-900">
+        <div className="text-3xl font-bold text-black dark:text-white flex flex-col items-center">
           <p className="mt-2">
             L<span className="inline-block animate-spin">🔄</span>ading...
           </p>
@@ -17,9 +16,11 @@ const PrivateRoute = ({ children }) => {
       </div>
     );
   }
+
   if (!user) {
     return <Navigate to={"/auth/signin"}></Navigate>;
   }
+
   return children;
 };
 
