@@ -2,6 +2,7 @@ import React, { use } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../../Provider/AuthContext";
 import toast from "react-hot-toast";
+import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -46,23 +47,25 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Home</a>
+              <NavLink to={"/"}>Home</NavLink>
             </li>
             <li>
-              <a>All Vehicles</a>
+              <NavLink to={"/allvehicles"}>All Vehicles</NavLink>
             </li>
             <li>
-              <a>Add Vehicles</a>
+              <NavLink to={"/addvehicles"}>Add Vehicles</NavLink>
             </li>
             <li>
-              <a>My Vehicles</a>
+              <NavLink to={"/myvehicles"}>My Vehicles</NavLink>
             </li>
             <li>
-              <a>My Bookings</a>
+              <NavLink to={"/mybooking"}>My Bookings</NavLink>
             </li>
           </ul>
         </div>
-        <a className=" text-2xl font-semibold">TravelEase</a>
+        <a className=" text-3xl font-medium">
+          <span className=" font-bold">Travel</span>Ease
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal font-semibold px-1">
@@ -112,7 +115,9 @@ const Navbar = () => {
               to={"/auth/signin"}
               className={({ isActive }) =>
                 `btn mr-2 md:mr-0 md:text-lg ${
-                  isActive ? "bg-yellow-400 rounded-full" : "rounded-full"
+                  isActive
+                    ? "btn-success text-white rounded-full"
+                    : "rounded-full"
                 }`
               }
             >
@@ -122,7 +127,9 @@ const Navbar = () => {
               to={"/auth/signup"}
               className={({ isActive }) =>
                 `btn md:text-lg ${
-                  isActive ? "bg-yellow-400 rounded-full " : "rounded-full"
+                  isActive
+                    ? "btn-success text-white rounded-full "
+                    : "rounded-full"
                 }`
               }
             >

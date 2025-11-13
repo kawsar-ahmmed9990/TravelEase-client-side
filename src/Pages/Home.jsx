@@ -12,8 +12,8 @@ const Home = () => {
     <div>
       <Banner></Banner>
       <TopCategories></TopCategories>
-      <AboutTravelEase></AboutTravelEase>
-      <section className="max-w-11/12 mx-auto ">
+
+      <section className="max-w-11/12 mx-auto pb-10">
         <h1 className="text-2xl font-semibold my-5 text-center">
           Newest Additions
         </h1>
@@ -21,6 +21,7 @@ const Home = () => {
           latestVehiclesPromise={latestVehiclesPromise}
         ></VehicleCard>
       </section>
+      <AboutTravelEase></AboutTravelEase>
     </div>
   );
 };

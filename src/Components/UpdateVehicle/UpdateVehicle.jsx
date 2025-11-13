@@ -113,14 +113,27 @@ const UpdateVehicle = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
+          {/* <input
             type="text"
             name="category"
             value={vehicleData.category || ""}
             onChange={handleChange}
             placeholder="Category (SUV, Sedan, Electric, Van)"
             className="border px-3 py-2 rounded w-full"
-          />
+          /> */}
+          <select
+            name="category"
+            value={vehicleData.category || ""}
+            onChange={handleChange}
+            className="border px-3 py-2 rounded w-full"
+          >
+            <option value="">Select Category</option>
+            <option value="SUV">SUV</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Electric">Electric</option>
+            <option value="Van">Van</option>
+          </select>
+
           <input
             type="number"
             name="pricePerDay"
@@ -140,14 +153,24 @@ const UpdateVehicle = () => {
             placeholder="Location"
             className="border px-3 py-2 rounded w-full"
           />
-          <input
+          {/* <input
             type="text"
             name="availability"
             value={vehicleData.availability || ""}
             onChange={handleChange}
             placeholder="Availability"
             className="border px-3 py-2 rounded w-full"
-          />
+          /> */}
+          <select
+            name="availability"
+            value={vehicleData.availability || ""}
+            onChange={handleChange}
+            className="border px-3 py-2 rounded w-full"
+          >
+            <option value="">Select Availability</option>
+            <option value="Available">Available</option>
+            <option value="Booked">Booked</option>
+          </select>
         </div>
 
         <input

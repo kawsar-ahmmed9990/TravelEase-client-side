@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       {
         path: "/allvehicles",
         loader: () =>
-          fetch("https://travelease-server-side-omega.vercel.app/vehicles"),
+          fetch("https://travelease-server-side-omega.vercel.app/sort"),
         element: <AllVehicles></AllVehicles>,
       },
       {

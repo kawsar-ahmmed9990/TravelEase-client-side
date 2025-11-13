@@ -102,7 +102,9 @@ const SignUp = () => {
                   </span>
                 </div>
 
-                <button className="btn btn-neutral mt-4">Sign Up</button>
+                <button className="btn btn-success rounded-full text-white mt-4">
+                  Sign Up
+                </button>
               </fieldset>
             </form>
             {/* Divider */}

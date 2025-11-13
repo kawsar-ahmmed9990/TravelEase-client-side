@@ -9,7 +9,7 @@ const SignIn = () => {
   const { signInUser, googleSignIn } = use(AuthContext);
   const navigate = useNavigate();
   const emailRef = useRef(null);
-  
+
   const handleSignIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -18,7 +18,6 @@ const SignIn = () => {
 
     signInUser(email, password)
       .then(() => {
-        
         toast.success("Login successfull!");
         navigate(`${location.state ? location.state : "/"}`);
         e.target.reset();
@@ -26,7 +25,6 @@ const SignIn = () => {
       .catch((e) => {
         if (e.code === "auth/invalid-credential") {
           toast.error("Invalid email or password. Please try again.");
-          
         } else if (e.code === "auth/network-request-failed") {
           toast.error("Network error. Please check your internet connection.");
         } else {
@@ -39,7 +37,7 @@ const SignIn = () => {
     googleSignIn()
       .then((res) => {
         console.log(res);
-        
+
         toast.success("Login successfull!");
         navigate(`${location.state ? location.state : "/"}`);
       })
@@ -95,7 +93,9 @@ const SignIn = () => {
                 >
                   Forgot password?
                 </button>
-                <button className="btn btn-neutral mt-4">Sign In</button>
+                <button className="btn btn-success text-white rounded-full mt-4">
+                  Sign In
+                </button>
               </fieldset>
             </form>
             {/* Divider */}

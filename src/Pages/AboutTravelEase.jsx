@@ -12,7 +12,7 @@ const AboutTravelEase = () => {
           adventure or an Electric car for eco-friendly travel, TravelEase has
           you covered.
         </p>
-        <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-3 rounded-full shadow-md transition duration-300">
+        <button className="btn btn-success text-white  font-semibold px-6 py-3 rounded-full shadow-md transition duration-300">
           Learn More
         </button>
       </div>

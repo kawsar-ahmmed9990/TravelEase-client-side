@@ -83,9 +83,7 @@ const AddVehicles = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
-      <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">
-        Add New Vehicle
-      </h2>
+      <h2 className="text-3xl font-bold mb-6 text-center ">Add New Vehicle</h2>
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-lg p-6 space-y-4"
@@ -110,14 +108,27 @@ const AddVehicles = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
+          {/* <input
             type="text"
             name="category"
             value={vehicleData.category}
             onChange={handleChange}
             placeholder="Category (SUV, Sedan, Electric, Van)"
             className="border px-3 py-2 rounded w-full"
-          />
+          /> */}
+          <select
+            name="category"
+            value={vehicleData.category}
+            onChange={handleChange}
+            className="border px-3 py-2 rounded w-full"
+          >
+            <option value="">Select Category</option>
+            <option value="SUV">SUV</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Electric">Electric</option>
+            <option value="Van">Van</option>
+          </select>
+
           <input
             type="number"
             name="pricePerDay"
@@ -137,14 +148,24 @@ const AddVehicles = () => {
             placeholder="Location"
             className="border px-3 py-2 rounded w-full"
           />
-          <input
+          {/* <input
             type="text"
             name="availability"
             value={vehicleData.availability}
             onChange={handleChange}
             placeholder="Availability (e.g., Available, Booked)"
             className="border px-3 py-2 rounded w-full"
-          />
+          /> */}
+          <select
+            name="availability"
+            value={vehicleData.availability}
+            onChange={handleChange}
+            className="border px-3 py-2 rounded w-full"
+          >
+            <option value="">Select Availability</option>
+            <option value="Available">Available</option>
+            <option value="Booked">Booked</option>
+          </select>
         </div>
 
         <input
@@ -175,7 +196,7 @@ const AddVehicles = () => {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition w-full"
+          className="btn btn-success font-medium px-4 py-2 rounded-full text-white transition w-full"
         >
           Add Vehicle
         </button>
