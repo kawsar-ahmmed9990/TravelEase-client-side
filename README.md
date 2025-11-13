@@ -1,16 +1,28 @@
-# React + Vite
+####
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website name: TravelEase
 
-Currently, two official plugins are available:
+###
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+live site URL:"https://comforting-custard-d4d609.netlify.app/"
 
-## React Compiler
+###
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**User Authentication**
+Secure login and registration using Firebase Authentication.  
+**Explore Vehicles**
+Browse all available vehicles with details such as category, location, price, and availability.  
+**Add & Manage Vehicles**
+Authenticated users can add new vehicles, update existing vehicle details, and delete their listings.  
+**Booking System**
+Users can book vehicles, view their bookings, and track the status of each reservation.  
+**Modern UI/UX**
+Clean, responsive, and dark-mode ready design with smooth transitions and animations using Framer Motion.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Frontend**: React, Tailwind CSS, Framer Motion, axios, Date-fns, SweetAlert2, React Icons  
+**Backend**: Node.js, Express.js  
+**Database**: MongoDB  
+**Authentication**: Firebase Authentication  
+**Deployment**: Netlify (Frontend), Vercel (Backend)
