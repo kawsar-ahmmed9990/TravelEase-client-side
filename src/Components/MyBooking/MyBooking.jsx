@@ -9,7 +9,9 @@ const MyBooking = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:3000/bookings?userEmail=${user.email}`)
+    fetch(
+      `https://travelease-server-side-omega.vercel.app/bookings?userEmail=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setBookings(data);

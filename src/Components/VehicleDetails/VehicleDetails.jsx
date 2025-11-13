@@ -35,19 +35,25 @@ const VehicleDetails = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:3000/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bookingData),
-      });
+      const res = await fetch(
+        "https://travelease-server-side-omega.vercel.app/bookings",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(bookingData),
+        }
+      );
       const data = await res.json();
 
       if (data.insertedId) {
-        await fetch(`http://localhost:3000/vehicles/${vehicle._id}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ availability: "Booked" }),
-        });
+        await fetch(
+          `https://travelease-server-side-omega.vercel.app/vehicles/${vehicle._id}`,
+          {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ availability: "Booked" }),
+          }
+        );
 
         setVehicle((prev) => ({ ...prev, availability: "Booked" }));
         alert("Vehicle booked successfully!");

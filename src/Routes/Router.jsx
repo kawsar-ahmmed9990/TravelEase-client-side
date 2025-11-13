@@ -24,13 +24,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/allvehicles",
-        loader: () => fetch("http://localhost:3000/vehicles"),
+        loader: () =>
+          fetch("https://travelease-server-side-omega.vercel.app/vehicles"),
         element: <AllVehicles></AllVehicles>,
       },
       {
         path: "/vehicledetails/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/vehicles/${params.id}`),
+          fetch(
+            `https://travelease-server-side-omega.vercel.app/vehicles/${params.id}`
+          ),
         element: (
           <PrivateRoute>
             {" "}
@@ -41,7 +44,9 @@ const router = createBrowserRouter([
       {
         path: "/updatevehicle/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5174/updatevehicle/${params.id}`),
+          fetch(
+            `https://travelease-server-side-omega.vercel.app/updatevehicle/${params.id}`
+          ),
         element: (
           <PrivateRoute>
             <UpdateVehicle></UpdateVehicle>

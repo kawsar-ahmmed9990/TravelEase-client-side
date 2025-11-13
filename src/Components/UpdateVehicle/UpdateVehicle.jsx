@@ -23,7 +23,7 @@ const UpdateVehicle = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/vehicles/${id}`)
+    fetch(`https://travelease-server-side-omega.vercel.app/vehicles/${id}`)
       .then(async (res) => {
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         return res.json();
@@ -57,7 +57,7 @@ const UpdateVehicle = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/vehicles/${id}`, {
+    fetch(`https://travelease-server-side-omega.vercel.app/vehicles/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(vehicleData),

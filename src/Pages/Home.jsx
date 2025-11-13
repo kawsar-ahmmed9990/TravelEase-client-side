@@ -6,7 +6,7 @@ import VehicleCard from "../Components/VehicleCard/VehicleCard";
 
 const Home = () => {
   const latestVehiclesPromise = fetch(
-    "http://localhost:3000/latest-vehicles"
+    "https://travelease-server-side-omega.vercel.app/latest-vehicles"
   ).then((res) => res.json());
   return (
     <div>

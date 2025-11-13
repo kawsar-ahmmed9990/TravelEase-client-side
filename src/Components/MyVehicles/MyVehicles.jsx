@@ -10,7 +10,9 @@ const MyVehicles = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/vehicles?userEmail=${user.email}`)
+      fetch(
+        `https://travelease-server-side-omega.vercel.app/vehicles?userEmail=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setVehicles(data);
@@ -30,9 +32,12 @@ const MyVehicles = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/vehicles/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://travelease-server-side-omega.vercel.app/vehicles/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
