@@ -12,11 +12,14 @@ import AddVehicles from "../Components/AddVehicles/AddVehicles";
 import PrivateRoute from "./PrivateRoute";
 import VehicleDetails from "../Components/VehicleDetails/VehicleDetails";
 import UpdateVehicle from "../Components/UpdateVehicle/UpdateVehicle";
+import ErrorPage from "../Pages/ErrorPage";
+import PublicRoute from "./PublicRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -24,8 +27,6 @@ const router = createBrowserRouter([
       },
       {
         path: "/allvehicles",
-        loader: () =>
-          fetch("https://travelease-server-side-omega.vercel.app/sort"),
         element: <AllVehicles></AllVehicles>,
       },
       {
@@ -85,11 +86,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/auth/signup",
-        element: <SignUp></SignUp>,
+        element: (
+          <PublicRoute>
+            <SignUp></SignUp>
+          </PublicRoute>
+        ),
       },
       {
         path: "/auth/signin",
-        element: <SignIn></SignIn>,
+        element: (
+          <PublicRoute>
+            <SignIn></SignIn>
+          </PublicRoute>
+        ),
       },
       {
         path: "/auth/signin/forgetpassword",

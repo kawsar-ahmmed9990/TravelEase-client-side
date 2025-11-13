@@ -23,8 +23,17 @@ const MyBooking = () => {
       });
   }, [user?.email]);
 
-  if (loading)
-    return <p className="text-center mt-6">Loading your bookings...</p>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64 bg-[#f1f5e8]">
+        <div className="text-3xl font-bold text-black flex flex-col items-center">
+          <p className="mt-2">
+            L<span className="inline-block animate-spin">🔄</span>ading...
+          </p>
+        </div>
+      </div>
+    );
+  }
   if (bookings.length === 0)
     return <p className="text-center mt-6 text-gray-500">No bookings found.</p>;
 

@@ -14,7 +14,7 @@ const Home = () => {
       <TopCategories></TopCategories>
 
       <section className="max-w-11/12 mx-auto pb-10">
-        <h1 className="text-2xl font-semibold my-5 text-center">
+        <h1 className="text-3xl font-bold my-5 text-center">
           Newest Additions
         </h1>
         <VehicleCard

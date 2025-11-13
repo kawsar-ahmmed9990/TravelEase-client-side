@@ -1,16 +1,30 @@
-"use client"; // mark as client component
-
 import React, { useState, useEffect } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { TbCategoryFilled } from "react-icons/tb";
 import { Link } from "react-router";
 
 const VehicleCard = ({ latestVehiclesPromise }) => {
+  const [loading, setLoading] = useState(true);
   const [latestVehicles, setLatestVehicles] = useState([]);
 
   useEffect(() => {
-    latestVehiclesPromise.then((data) => setLatestVehicles(data));
+    setLoading(true);
+    latestVehiclesPromise.then((data) => {
+      setLatestVehicles(data);
+      setLoading(false);
+    });
   }, [latestVehiclesPromise]);
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64 bg-[#f1f5e8]">
+        <div className="text-3xl font-bold text-black flex flex-col items-center">
+          <p className="mt-2">
+            L<span className="inline-block animate-spin">🔄</span>ading...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

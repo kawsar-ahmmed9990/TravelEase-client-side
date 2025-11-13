@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { TbCategoryFilled } from "react-icons/tb";
-import { Link, useLoaderData } from "react-router";
+import { Link } from "react-router";
+import { AuthContext } from "../../Provider/AuthContext";
 
 const AllVehicles = () => {
-  const allVehicles = useLoaderData();
+  const [vehicles, setVehicles] = useState([]);
+  const [loading, setLoading] = useState(true);
   // console.log(allVehicles);
+  useEffect(() => {
+    fetch("https://travelease-server-side-omega.vercel.app/vehicles")
+      .then((res) => res.json())
+      .then((data) => {
+        setVehicles(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64 bg-[#f1f5e8]">
+        <div className="text-3xl font-bold text-black flex flex-col items-center">
+          <p className="mt-2">
+            L<span className="inline-block animate-spin">🔄</span>ading...
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="max-w-11/12 mx-auto pb-10">
       <div>
@@ -14,7 +39,7 @@ const AllVehicles = () => {
         </h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {allVehicles.map((vehicle) => (
+        {vehicles.map((vehicle) => (
           <div
             key={vehicle._id}
             className="bg-white shadow rounded-lg p-4 overflow-hidden hover:shadow-lg transition"

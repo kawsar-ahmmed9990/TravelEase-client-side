@@ -47,8 +47,17 @@ const MyVehicles = () => {
     });
   };
 
-  if (loading)
-    return <p className="text-center mt-10">Loading your vehicles...</p>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64 bg-[#f1f5e8]">
+        <div className="text-3xl font-bold text-black flex flex-col items-center">
+          <p className="mt-2">
+            L<span className="inline-block animate-spin">🔄</span>ading...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
